@@ -1,0 +1,42 @@
+<main class="w-full min-h-screen px-32 md:px-20 sm:px-10 max-[440px]:px-4 max-[639px]:px-6 py-5 
+flex flex-col gap-5"
+[ngClass]="[darkMode ? 'bg-[#202c37] text-white]' : 'bg-[#fafafa] text-[#111517]']">
+    <div class="mt-20 flex justify-between my-5 max-[440px]:flex-col max-[440px]:gap-4 max-[440px]:items-center">
+        <input type="search" placeholder="Search for a country" class="h-[50px] w-[25%] md:w-[30%] sm:w-[40%] 
+        max-[440px]:w-[80%] max-[639px]:w-[46%] font-semibold shadow-lg rounded-md outline-0 pl-5"
+        [ngClass]="[darkMode ? 'bg-[#2b3945] text-white' : 'bg-white text-[#858585]']" [value]="searchKey"
+        #search (searchKey)="search.value" (input)="getCountriesByName(search.value)">
+        
+        <select name="filter" id="filter" class="w-full h-[50px] p-2" class="outline-0 h-[50px] w-[18%] 
+        md:w-[25%] sm:w-[30%] max-[440px]:w-[60%] max-[639px]:w-[36%] p-2 rounded-md cursor-pointer shadow-lg 
+        font-semibold text-[#858585]"
+        [ngClass]="[darkMode ? 'bg-[#2b3945] text-white' : 'bg-white text-[#858585]']"  
+        #region (input)="getCountriesByRegion(region.value)" >
+            <option value="DEFAULT" disabled="" class="cursor-pointer" hidden="" selected="">Filter by Region</option>
+            <option>Africa</option>
+            <option>Americas</option>
+            <option>Asia</option>
+            <option>Europe</option>
+            <option>Oceania</option>
+        </select>
+        
+    </div>
+    
+    <div class="flex flex-wrap max-[440px]:flex-col justify-between max-[440px]:items-center max-[639px]:flex-col max-[639px]:items-center gap-12">
+        <div *ngFor="let country of countries" class="xl:w-[20%] lg:w-[28%] md:w-[45%] sm:w-[45%] 
+        max-[440px]:w-[80%] max-[639px]:w-[50%] max-[440px]:items-center shadow-md cursor-pointer rounded-md"
+        [ngClass]="[darkMode ? 'bg-[#2b3945]' : 'bg-white']"
+        (click)="selectCountry(country)">
+            <img [src]="country.flags.png" [alt]="country.name" class="w-full rounded-t-md h-[150px]">
+            <div class="p-4 rounded-b-md min-h-[150px] min-w-full"
+            [ngClass]="[darkMode ? 'bg-[#2b3945] text-white' : '']">
+                <h2 class="font-bold text-lg">{{country.name}}</h2>
+                <p><span class="text-sm font-semibold">Population: </span> <span class="text-sm">{{country.population}}</span> </p>
+                <p><span class="text-sm font-semibold">Region: </span> <span class="text-sm">{{country.region}}</span> </p>
+                <p><span class="text-sm font-semibold">Capital: </span> <span class="text-sm">{{country.capital}}</span> </p>
+            </div>
+        </div>
+    </div>
+
+    
+</main>

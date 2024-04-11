@@ -1,0 +1,45 @@
+<main class="px-32 md:px-20 sm:px-10 max-[440px]:px-4 max-[639px]:px-6 max-[440px]:py-4 py-20
+min-h-screen flex flex-col gap-20 max-[440px]:gap-10 max-[639px]:gap-10"
+[ngClass]="[darkMode ? 'bg-[#202c37] text-white' : 'bg-[#fafafa] text-[#111517]']">
+    <div class="mt-20">
+        <div *ngIf="!darkMode" (click)="onBack()" class="cursor-pointer bg-white w-28 h-9 rounded-lg shadow-md text-sm flex justify-center gap-4"> 
+            <img src="../../assets/images/arrow-back-black.svg" alt="Back" class="w-4 py-1"> 
+            <span class="text-base py-1.5">Back</span>
+        </div>
+        <div *ngIf="darkMode" (click)="onBack()" class="cursor-pointer bg-[#2b3945] w-28 h-9 rounded-lg shadow-md text-sm flex justify-center gap-4"> 
+            <img src="../../assets/images/arrow-back-white.svg" alt="Back" class="w-4 py-1"> 
+            <span class="text-base py-1.5 text-white">Back</span>
+        </div>
+        
+    </div>
+    <div class="flex justify-between gap-20 min-h-full lg:flex-row md:flex-col sm:flex-col max-[440px]:flex-col max-[639px]:flex-col max-[440px]:items-center max-[639px]:items-center max-[440px]:gap-8 max-[440px]:shadow-lg max-[639px]:gap-8">
+        <img class="xl:w-full min-h-[300px] lg:w-full lg:min-h-[200px] max-[440px]:w-64 max-[639px]:w-66 max-[440px]:min-h-[200px] max-[639px]:min-h-[200px] shadow-lg" [alt]="selectedCountry?.name" [src]="selectedCountry?.flags?.png">
+        <div class="py-8 px-5 w-full flex flex-col gap-5 max-[440px]:gap-3 max-[639px]:gap-3">
+            <h2 class="font-bold text-2xl">{{name}}</h2>
+            <div class="flex justify-between max-[440px]:flex-col max-[639px]:flex-col max-[440px]:gap-2 max-[639px]:gap-2">
+                <div>
+                    <p><span class="text-sm font-semibold">Native name: </span> <span class="text-sm">{{selectedCountry?.nativeName}}</span> </p>
+                    <p><span class="text-sm font-semibold">Population: </span> <span class="text-sm">{{selectedCountry?.population}}</span> </p>
+                    <p><span class="text-sm font-semibold">Region: </span> <span class="text-sm">{{selectedCountry?.region}}</span> </p>
+                    <p><span class="text-sm font-semibold">Sub-Region: </span> <span class="text-sm">{{selectedCountry?.subregion}}</span> </p>
+                    <p><span class="text-sm font-semibold">Capital: </span> <span class="text-sm">{{selectedCountry?.capital}}</span> </p>
+                </div>
+                <div>
+                    <p><span class="text-sm font-semibold">Top level domain: </span> <span class="text-sm">{{selectedCountry?.topLevelDomain}}</span> </p>
+                    <p *ngFor="let currency of selectedCountry?.currencies"><span class="text-sm font-semibold">Currencies: </span> <span class="text-sm">{{currency.name}}</span> </p>
+                    <p><span class="text-sm font-semibold">Languages: </span> <span *ngFor="let language of selectedCountry?.languages" class="text-sm">{{language.name}}</span> </p>
+                </div>
+                
+            </div>
+            <div class="mt-5 pt-2 flex gap-4 max-[440px]:flex-col max-[639px]:flex-col">
+                <span class="text-sm font-semibold">Border Countries: </span>
+                <div class="flex flex-wrap gap-2 max-[440px]:gap-1 max-[639px]:gap-1">    
+                    <div *ngFor="let border of countryCodes; let i = index" class="text-xs font-thin w-auto h-6 rounded-md shadow-md py-1 px-4"
+                    [ngClass]="[darkMode ? 'bg-[#2b3945]' : 'bg-white']">
+                        <p>{{countryNames[i]}}</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</main>
