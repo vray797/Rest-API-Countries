@@ -25,7 +25,7 @@ export class SharedService {
   }
 
   getCountries() {
-    this.countries = this.http.get<Country[]>("../../assets/data.json");
+    this.countries = this.http.get<Country[]>("/assets/data.json");
     return this.countries
   }
 
